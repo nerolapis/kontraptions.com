@@ -1,0 +1,8 @@
+{%- comment -%} Usage: {% include topic-chips.html topics=page.topics %} (omit topics to list them all) {%- endcomment -%}
+<p class="chips">
+{% if include.topics %}
+  {% for slug in include.topics %}{% assign t = site.topics | where: "slug", slug | first %}{% if t %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif %}{% endfor %}
+{% else %}
+  {% assign all = site.topics | sort: "order" %}{% for t in all %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endfor %}
+{% endif %}
+</p>

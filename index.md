@@ -15,16 +15,6 @@ title: Home
 
 <h2 id="projects">Projects</h2>
 
-<ul class="project-grid">
-{% assign projects = site.projects | sort: "order" %}
-{% for p in projects %}
-  <li>
-    <a href="{{ p.url | relative_url }}">
-      <img class="{{ p.cover_style | default: 'photo' }}" src="{{ p.cover | relative_url }}" alt="{{ p.title }}" loading="lazy">
-      <span class="kicker">{{ p.kind }}</span>
-      <strong>{{ p.title }}</strong>
-      <span class="tagline">{{ p.tagline }}</span>
-    </a>
-  </li>
-{% endfor %}
-</ul>
+{% include topic-chips.html %}
+
+{% include project-grid.html projects=site.projects %}

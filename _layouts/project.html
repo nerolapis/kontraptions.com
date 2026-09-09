@@ -4,12 +4,18 @@ layout: default
 <article class="project">
   <header class="project-header">
     {% if page.cover %}
-    <img class="project-cover {{ page.cover_style | default: 'photo' }}" src="{{ page.cover | relative_url }}" alt="{{ page.title }}">
+    <span class="cover">
+      <img class="{{ page.cover_style | default: 'photo' }}" src="{{ page.cover | relative_url }}" alt="{{ page.title }}">
+    </span>
     {% endif %}
     <div>
       <p class="kicker">{{ page.kind }}</p>
       <h1>{{ page.title }}</h1>
       {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+      {% if page.version %}
+      <p class="version">Version {{ page.version }}{% if page.released %}, released {{ page.released | date: "%-d %B %Y" }}{% endif %}</p>
+      {% endif %}
+      {% if page.topics %}{% include topic-chips.html topics=page.topics %}{% endif %}
       {% if page.links %}
       <p class="project-links">
         {% for l in page.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}

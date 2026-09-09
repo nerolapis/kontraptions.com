@@ -1,0 +1,16 @@
+{%- comment -%} Usage: {% include project-grid.html projects=some_list %} {%- endcomment -%}
+<ul class="project-grid">
+{% assign list = include.projects | sort: "order" %}
+{% for p in list %}
+  <li>
+    <a href="{{ p.url | relative_url }}">
+      <span class="cover">
+        <img class="{{ p.cover_style | default: 'photo' }}" src="{{ p.cover | relative_url }}" alt="{{ p.title }}" loading="lazy">
+      </span>
+      <span class="kicker">{{ p.kind }}</span>
+      <strong>{{ p.title }}</strong>
+      <span class="tagline">{{ p.tagline }}</span>
+    </a>
+  </li>
+{% endfor %}
+</ul>

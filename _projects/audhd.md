@@ -1,9 +1,10 @@
 ---
 title: AuDHD
 kind: T-shirt
-tagline: Au, atomic number 79. The gold standard of neurodivergence.
+tagline: The gold standard of neurodivergence.
 cover: /assets/img/audhd-cover.png
 cover_style: photo
+topics: [tshirts]
 order: 2
 links:
   - label: Buy the shirt

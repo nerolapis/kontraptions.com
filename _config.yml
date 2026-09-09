@@ -22,10 +22,14 @@ author:
       url: mailto:hello@kontraptions.com
 
 # Every file in _projects/ becomes a page at /projects/<filename>/
+# Every file in _topics/ becomes a page at /topics/<filename>/ listing the projects tagged with it
 collections:
   projects:
     output: true
     permalink: /projects/:name/
+  topics:
+    output: true
+    permalink: /topics/:name/
 
 defaults:
   - scope:
@@ -37,6 +41,11 @@ defaults:
       type: projects
     values:
       layout: project
+  - scope:
+      path: ""
+      type: topics
+    values:
+      layout: topic
 
 exclude:
   - Gemfile

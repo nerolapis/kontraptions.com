@@ -83,20 +83,52 @@ h2 { font-weight: 600; margin: 2.5rem 0 1rem; }
 .links a { margin-right: 1rem; text-decoration: none; }
 .links a:hover { text-decoration: underline; }
 
-/* Project grid */
+/* Cover images: always a square box, whatever the source image */
+.cover {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #ededed;
+}
+
+.cover img.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover img.icon {
+  width: 62%;
+  height: 62%;
+  border-radius: 22%;
+}
+
+/* Project grid: three across, then two, then one */
 .project-grid {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
+}
+
+@media (max-width: 40rem) {
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 26rem) {
+  .project-grid { grid-template-columns: 1fr; }
 }
 
 .project-grid a {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  height: 100%;
   padding: 1rem;
   background: var(--card);
   border: 1px solid var(--rule);
@@ -111,22 +143,28 @@ h2 { font-weight: 600; margin: 2.5rem 0 1rem; }
   transform: translateY(-2px);
 }
 
-.project-grid img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 0.75rem;
-}
-
-.project-grid img.icon {
-  width: 96px;
-  height: 96px;
-  border-radius: 22%;
-}
-
+.project-grid .cover { margin-bottom: 0.75rem; }
 .project-grid strong { font-size: 1.1rem; }
 .project-grid .tagline { font-size: 0.95rem; }
+
+/* Topic chips */
+.chips { margin: 0 0 1.25rem; }
+
+.chips a {
+  display: inline-block;
+  margin: 0 0.4rem 0.4rem 0;
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.chips a:hover { border-color: var(--accent); color: var(--accent); }
+
+.muted { color: var(--muted); }
 
 /* Project page */
 .project-header {
@@ -136,15 +174,20 @@ h2 { font-weight: 600; margin: 2.5rem 0 1rem; }
   margin-bottom: 2rem;
 }
 
-.project-cover {
+.project-header .cover {
   flex-shrink: 0;
   width: 160px;
-  height: 160px;
-  object-fit: cover;
   border-radius: var(--radius);
 }
 
-.project-cover.icon { border-radius: 22%; }
+.project-header .chips { margin: 0.5rem 0 0; }
+
+.version {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 
 .project-links a {
   display: inline-block;

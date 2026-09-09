@@ -4,6 +4,8 @@ kind: macOS app
 tagline: Type a colon, get an emoji. Or a hieroglyph. Your call.
 cover: /assets/img/colon-icon.png
 cover_style: icon
+topics: [no-internet-apps]
+version: "1.0"
 order: 1
 links:
   - label: Download for macOS
