@@ -15,6 +15,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. A periodic-table take o
 
 ## The design
 
+![The AuDHD design: the periodic-table tile for gold, Au 79, followed by DHD](/assets/img/audhd-design.png)
+
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
 
 ## Where to get it

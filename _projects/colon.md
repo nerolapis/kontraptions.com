@@ -47,7 +47,7 @@ Colon collects nothing. No network, no analytics, no account. Your emoji habits 
 
 It does need two macOS permissions to do its job, and it explains both on first launch: **Input Monitoring**, to notice when you type the trigger character, and **Accessibility**, to find your cursor and insert the character you picked. That's what they're for, and nothing else.
 
-In short--it see everything you type, but it will never tell it to anyone.
+In short--it sees everything you type, but it will never tell it to anyone.
 
 ## Requirements
 
