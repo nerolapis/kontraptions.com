@@ -1,13 +1,30 @@
 ---
-title: Welcome
+title: Home
 ---
 
-This is **Kontraptions**, now built with Jekyll. Every page on this site is a Markdown file in the repository, and GitHub turns them into HTML on each push.
+<section class="intro">
+  <img class="avatar" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}" width="128" height="128">
+  <div>
+    <h1>{{ site.author.name }}</h1>
+    <p>{{ site.author.bio }}</p>
+    <p class="links">
+      {% for l in site.author.links %}{% if l.url != "" %}<a href="{{ l.url }}">{{ l.label }}</a>{% endif %}{% endfor %}
+    </p>
+  </div>
+</section>
 
-Latest from the blog:
+<h2 id="projects">Projects</h2>
 
-<ul class="post-list">
-{% for post in site.posts limit:5 %}
-  <li><time>{{ post.date | date: "%Y-%m-%d" }}</time><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+<ul class="project-grid">
+{% assign projects = site.projects | sort: "order" %}
+{% for p in projects %}
+  <li>
+    <a href="{{ p.url | relative_url }}">
+      <img class="{{ p.cover_style | default: 'photo' }}" src="{{ p.cover | relative_url }}" alt="{{ p.title }}" loading="lazy">
+      <span class="kicker">{{ p.kind }}</span>
+      <strong>{{ p.title }}</strong>
+      <span class="tagline">{{ p.tagline }}</span>
+    </a>
+  </li>
 {% endfor %}
 </ul>

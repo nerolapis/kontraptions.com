@@ -1,19 +1,45 @@
 title: Kontraptions
-description: Gadgets, experiments, and things that almost work.
+description: Apps, gadgets, and things that almost work, by Konstantin Erokhin.
 url: https://kontraptions.com
 baseurl: ""
 
 markdown: kramdown
-permalink: /blog/:year/:month/:day/:title/
 
-# Apply the default layout to every page and post unless a file says otherwise.
+# Who runs the site. Edit the links below; leave a value empty to hide that link.
+author:
+  name: Konstantin Erokhin
+  handle: nerolapis
+  avatar: /assets/img/avatar.png
+  bio: I make small apps and odd objects. This is where they end up.
+  links:
+    - label: GitHub
+      url: https://github.com/nerolapis
+    - label: Mastodon
+      url: https://mastodon.social/@nerolapis
+    - label: Bluesky
+      url: https://bsky.app/profile/nerolapis.bsky.social
+    - label: Email
+      url: mailto:hello@kontraptions.com
+
+# Every file in _projects/ becomes a page at /projects/<filename>/
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
 defaults:
   - scope:
       path: ""
     values:
       layout: default
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
 
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - temp
