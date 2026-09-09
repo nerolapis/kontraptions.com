@@ -4,8 +4,9 @@
 {% for p in list %}
   <li>
     <a href="{{ p.url | relative_url }}">
-      <span class="cover">
-        <img class="{{ p.cover_style | default: 'photo' }}" src="{{ p.cover | relative_url }}" alt="{{ p.title }}" loading="lazy">
+      {% assign style = p.cover_style | default: 'photo' %}
+      <span class="cover {{ style }}">
+        <img class="{{ style }}" src="{{ p.cover | relative_url }}" alt="{{ p.title }}" loading="lazy">
       </span>
       <span class="kicker">{{ p.kind }}</span>
       <strong>{{ p.title }}</strong>

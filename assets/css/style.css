@@ -85,7 +85,8 @@ h2 { font-weight: 600; margin: 2.5rem 0 1rem; }
 
 /* Cover images: every cover is the same square box. Images larger than the
    box are scaled down and cropped to fill it; smaller ones sit centered at
-   their natural size and are never upscaled. */
+   their natural size and are never upscaled. "photo" fills a rounded box;
+   "icon" is shown as-is, since app icons bring their own corners. */
 .cover {
   display: grid;
   place-items: center;
@@ -104,7 +105,7 @@ h2 { font-weight: 600; margin: 2.5rem 0 1rem; }
   object-fit: cover;
 }
 
-.cover img.icon { border-radius: 22%; }
+.cover.icon { background: none; border-radius: 0; }
 
 /* Project grid: three across, then two, then one */
 .project-grid {

@@ -3,9 +3,11 @@ layout: default
 ---
 <article class="project">
   <header class="project-header">
-    {% if page.cover %}
-    <span class="cover">
-      <img class="{{ page.cover_style | default: 'photo' }}" src="{{ page.cover | relative_url }}" alt="{{ page.title }}">
+    {% assign img = page.image | default: page.cover %}
+    {% assign style = page.image_style | default: page.cover_style | default: 'photo' %}
+    {% if img %}
+    <span class="cover {{ style }}">
+      <img class="{{ style }}" src="{{ img | relative_url }}" alt="{{ page.title }}">
     </span>
     {% endif %}
     <div>
