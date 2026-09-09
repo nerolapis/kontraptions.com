@@ -1,0 +1,19 @@
+title: Kontraptions
+description: Gadgets, experiments, and things that almost work.
+url: https://kontraptions.com
+baseurl: ""
+
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+
+# Apply the default layout to every page and post unless a file says otherwise.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
