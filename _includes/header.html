@@ -1,7 +1,8 @@
+{% assign home = "/" %}{% if site.coming_soon %}{% assign home = "/preview/" %}{% endif %}
 <header class="site-header">
-  <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <a class="brand" href="{{ home | relative_url }}">{{ site.title }}</a>
   <nav>
-    <a href="{{ '/#projects' | relative_url }}">Projects</a>
+    <a href="{{ home | append: '#projects' | relative_url }}">Projects</a>
     {% for l in site.author.links limit:1 %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}
   </nav>
 </header>

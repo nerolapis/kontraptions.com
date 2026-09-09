@@ -28,5 +28,6 @@ layout: default
 
   {{ content }}
 
-  <p class="back"><a href="{{ '/' | relative_url }}">&larr; All projects</a></p>
+  {% assign home = "/" %}{% if site.coming_soon %}{% assign home = "/preview/" %}{% endif %}
+<p class="back"><a href="{{ home | relative_url }}">&larr; All projects</a></p>
 </article>

@@ -1,0 +1,4 @@
+---
+---
+User-agent: *
+{% if site.coming_soon %}Disallow: /{% else %}Allow: /{% endif %}

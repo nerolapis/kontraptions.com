@@ -228,3 +228,18 @@ footer {
 @media (max-width: 36rem) {
   .intro, .project-header { flex-direction: column; align-items: flex-start; }
 }
+
+/* Coming-soon page */
+.coming-soon {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.coming-soon .avatar { margin-bottom: 1.5rem; }
+.coming-soon h1 { margin-bottom: 0.25rem; }
+.coming-soon p { margin: 0.25rem 0; color: var(--muted); }
+.coming-soon .links a { margin: 0 0.5rem; }

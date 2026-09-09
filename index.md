@@ -1,20 +1,8 @@
 ---
 title: Home
 ---
-
-<section class="intro">
-  <img class="avatar" src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name }}" width="128" height="128">
-  <div>
-    <h1>{{ site.author.name }}</h1>
-    <p>{{ site.author.bio }}</p>
-    <p class="links">
-      {% for l in site.author.links %}{% if l.url != "" %}<a href="{{ l.url }}">{{ l.label }}</a>{% endif %}{% endfor %}
-    </p>
-  </div>
-</section>
-
-<h2 id="projects">Projects</h2>
-
-{% include topic-chips.html %}
-
-{% include project-grid.html projects=site.projects %}
+{% if site.coming_soon %}
+{% include coming-soon.html %}
+{% else %}
+{% include home.html %}
+{% endif %}
