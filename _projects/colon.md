@@ -2,8 +2,8 @@
 title: Colon
 kind: macOS app
 tagline: Type a colon, get an emoji. Or a hieroglyph. Your call.
-cover: /assets/img/colon-icon.png
-cover_style: icon
+cover: /assets/img/colon-cover.png
+cover_style: photo
 topics: [no-internet-apps]
 version: "1.0"
 order: 1
@@ -45,6 +45,8 @@ Colon collects nothing. No network, no analytics, no account. Your emoji habits 
 
 It does need two macOS permissions to do its job, and it explains both on first launch: **Input Monitoring**, to notice when you type the trigger character, and **Accessibility**, to find your cursor and insert the character you picked. That's what they're for, and nothing else.
 
+In short--it see everything you type, but it will never tell it to anyone.
+
 ## Requirements
 
-macOS 15 Sequoia or later. Downloaded from this site, signed and notarized: double-click to open, no incantations required.
+macOS 15 Sequoia or later
