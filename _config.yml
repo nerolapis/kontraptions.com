@@ -57,3 +57,4 @@ exclude:
   - Gemfile.lock
   - README.md
   - temp
+  - bin

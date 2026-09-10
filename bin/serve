@@ -1,0 +1,14 @@
+#!/bin/sh
+# Local preview with the same Ruby GitHub Pages uses (Homebrew ruby@3.3).
+# First run installs the gems. Site appears at http://localhost:4000 and
+# rebuilds on every save. Coming-soon mode is off locally via _config.dev.yml.
+set -e
+cd "$(dirname "$0")/.."
+RUBY_BIN=/opt/homebrew/opt/ruby@3.3/bin
+if [ ! -x "$RUBY_BIN/bundle" ]; then
+  echo "Ruby 3.3 not found. Install it with: brew install ruby@3.3" >&2
+  exit 1
+fi
+export PATH="$RUBY_BIN:$PATH"
+bundle check >/dev/null 2>&1 || bundle install
+exec bundle exec jekyll serve --livereload --config _config.yml,_config.dev.yml "$@"

@@ -1,0 +1,5 @@
+# Local preview overrides. Used only when passed explicitly:
+#   bundle exec jekyll serve --livereload --config _config.yml,_config.dev.yml
+# GitHub Pages never reads this file.
+coming_soon: false
+url: http://localhost:4000
