@@ -1,0 +1,7 @@
+# Things found interesting, shown on the Me page, newest first.
+# Add new entries anywhere; they are sorted by date when the page is built.
+# Fields: date (YYYY-MM-DD), url, title, note (optional, one short line).
+- date: 2026-09-11
+  url: https://507movements.com
+  title: 507 Mechanical Movements
+  note: Henry T. Brown's 1868 catalogue of mechanisms, animated one by one.

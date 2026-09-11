@@ -1,0 +1,31 @@
+---
+title: Me
+permalink: /me/
+section: Me
+---
+
+<section class="intro">
+  <img class="avatar" src="{{ site.data.author.avatar | relative_url }}" alt="{{ site.data.author.name }}" width="128" height="128">
+  <div>
+    <h1>{{ site.data.author.name }}</h1>
+    <p>{{ site.data.author.bio }}</p>
+    <p class="links">
+      {% for l in site.data.author.links %}{% include author-link.html link=l %}{% endfor %}
+    </p>
+  </div>
+</section>
+
+<h2 id="rabbit-holes">Most recent rabbit-holes</h2>
+
+<ul class="linklist">
+  {%- assign links = site.data.links | sort: "date" | reverse -%}
+  {%- for l in links %}
+  <li>
+    <time datetime="{{ l.date | date: '%Y-%m-%d' }}">{{ l.date | date: "%-d %b %Y" }}</time>
+    <div>
+      <a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.title }}</a>
+      {%- if l.note %}<span class="note">{{ l.note }}</span>{% endif %}
+    </div>
+  </li>
+  {%- endfor %}
+</ul>

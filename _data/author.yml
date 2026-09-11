@@ -1,0 +1,18 @@
+# Who runs the site. This file is watched by the local preview, so edits show up
+# without restarting bin/serve. Leave a link's value empty to hide that link.
+# An email link is split into user and domain so the address never appears in
+# the HTML as text; a small script joins the two parts in the browser.
+name: Konstantin Erokhin
+handle: nerolapis
+avatar: /assets/img/avatar.png
+# The bio may contain HTML; it is inserted into the page as written.
+bio: >-
+  I work at <a href="https://shinyfrog.net">Shiny Frog</a>, on
+  <a href="https://bear.app">Bear</a> and <a href="https://lettera.md">Lettera</a>.
+  In my free time I make other things, some useful, some just because, and this is where they end up.
+links:
+  - label: GitHub
+    url: https://github.com/nerolapis
+  - label: Email
+    email_user: konstantin.erokhin
+    email_domain: shinyfrog.net

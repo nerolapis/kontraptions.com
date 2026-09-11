@@ -1,8 +1,34 @@
-{% assign home = "/" %}{% if site.coming_soon %}{% assign home = "/preview/" %}{% endif %}
+{%- assign home = "/" -%}{%- if site.coming_soon -%}{%- assign home = "/preview/" -%}{%- endif -%}
+{%- assign section = page.section -%}
+{%- if page.collection == "projects" or page.collection == "topics" -%}{%- assign section = "Projects" -%}{%- endif -%}
+{%- assign on_home = false -%}{%- if page.url == home -%}{%- assign on_home = true -%}{%- endif -%}
 <header class="site-header">
-  <a class="brand" href="{{ home | relative_url }}">{{ site.title }}</a>
-  <nav>
-    <a href="{{ home | append: '#projects' | relative_url }}">Projects</a>
-    {% for l in site.author.links limit:1 %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}
+  <nav class="crumbs" aria-label="Breadcrumb">
+    {%- comment -%}
+    The home link is a disclosure chevron: pointing down on the home page,
+    pointing right inside a section, where it doubles as the first separator.
+    {%- endcomment -%}
+    <a class="crumb-home{% if on_home %} open{% endif %}" href="{{ home | relative_url }}" aria-label="Home">{% include icon-home.html %}</a>
+    {%- if on_home == false and section %}
+    {%- if page.collection %}
+    <a href="{{ home | append: '#projects' | relative_url }}">{{ section }}</a>
+    {%- comment -%} A project shows its first topic as the crumb before its own name. {%- endcomment -%}
+    {%- if page.collection == "projects" and page.topics.size > 0 %}
+    {%- assign topic = site.topics | where: "slug", page.topics[0] | first %}
+    {%- if topic %}
+    <span class="sep" aria-hidden="true">{% include icon-chevron.html %}</span>
+    <a href="{{ topic.url | relative_url }}">{{ topic.title }}</a>
+    {%- endif %}
+    {%- endif %}
+    <span class="sep" aria-hidden="true">{% include icon-chevron.html %}</span>
+    <span class="current" aria-current="page">{{ page.title }}</span>
+    {%- else %}
+    <span class="current" aria-current="page">{{ section }}</span>
+    {%- endif %}
+    {%- endif %}
+  </nav>
+  <nav class="sections" aria-label="Sections">
+    <a href="{{ home | append: '#projects' | relative_url }}"{% if on_home or section == "Projects" %} class="active"{% endif %}>Projects</a>
+    <a href="{{ '/me/' | relative_url }}"{% if section == "Me" %} class="active"{% endif %}>Me</a>
   </nav>
 </header>

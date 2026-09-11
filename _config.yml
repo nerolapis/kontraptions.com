@@ -1,4 +1,4 @@
-title: Kontraptions
+title: "KO(ntraptions)"
 description: Apps, gadgets, and things that almost work, by Konstantin Erokhin.
 url: https://kontraptions.com
 baseurl: ""
@@ -10,21 +10,7 @@ coming_soon: true
 
 markdown: kramdown
 
-# Who runs the site. Edit the links below; leave a value empty to hide that link.
-author:
-  name: Konstantin Erokhin
-  handle: nerolapis
-  avatar: /assets/img/avatar.png
-  bio: I make small apps and odd objects. This is where they end up.
-  links:
-    - label: GitHub
-      url: https://github.com/nerolapis
-    - label: Mastodon
-      url: https://mastodon.social/@nerolapis
-    - label: Bluesky
-      url: https://bsky.app/profile/nerolapis.bsky.social
-    - label: Email
-      url: mailto:hello@kontraptions.com
+# Author name, bio, and links live in _data/author.yml.
 
 # Every file in _projects/ becomes a page at /projects/<filename>/
 # Every file in _topics/ becomes a page at /topics/<filename>/ listing the projects tagged with it

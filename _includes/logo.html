@@ -1,0 +1,68 @@
+{%- assign uid = include.uid | default: "main" -%}
+{%- comment -%}
+Usage: {% include logo.html uid="home" class="logo-hero" %}
+  uid    makes the SVG ids unique, so several logos can share a page
+  class  extra class on the link, used for sizing and colour
+
+The KO monogram: a pill-shaped body with a K cut out, balancing on an O.
+Everything is animated with CSS (see .ko-* rules in site.css), which works in
+every browser; SMIL animation of gradients does not in Safari.
+
+  - The colour is a big rect sliding behind a clip of the body shape. It is
+    currently a flat fill (currentColor, so it follows the text colour); the
+    rainbow gradient is kept in <defs> and can be restored by switching the
+    rect's fill back to url(#ko-rainbow-{{ uid }}). The gradient repeats with a period equal to its vector and the
+    rect moves by exactly that vector per loop, so the wave never jumps.
+  - The O and the K are cut out by a mask. The pill and the O are fixed. The K
+    is built as a small skeleton inside the mask: a standing leg, two arms and
+    a free leg. The script below rocks the whole figure around the foot
+    (148, 203) and swings each limb against the lean, as if it were keeping its
+    balance. The script lives in logo-script.html, included once per page by
+    the default layout; it animates every logo on the page independently. Every swing gets a random amplitude and duration, so it never
+    lands the same way twice. Nothing moves for visitors who prefer reduced
+    motion.
+
+The viewBox is trimmed to the shape (222 x 387) so the rendered height equals
+the SVG's CSS height exactly.
+{%- endcomment -%}
+<a class="logo {{ include.class }}" href="{{ '/me/' | relative_url }}" title="Me">
+  <svg viewBox="39 0 222 387" role="img" aria-label="{{ site.title }}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ko-rainbow-{{ uid }}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="300" y2="180" spreadMethod="repeat">
+        <stop offset="0"    stop-color="#ff5e5e"/>
+        <stop offset="0.17" stop-color="#ffb347"/>
+        <stop offset="0.33" stop-color="#ffe94d"/>
+        <stop offset="0.5"  stop-color="#5ad46f"/>
+        <stop offset="0.67" stop-color="#4fb3ff"/>
+        <stop offset="0.83" stop-color="#b56cff"/>
+        <stop offset="1"    stop-color="#ff5e5e"/>
+      </linearGradient>
+      <clipPath id="ko-pill-{{ uid }}">
+        <path d="M150,0 C211.303607,0 261,49.6963928 261,111 L260.992,110 L261,277 C260.458005,337.843781 210.969528,387 150,387 C88.6963928,387 39,337.303607 39,276 L39.008,277 L39,110 C39.5416994,49.156512 89.0302904,0 150,0 Z"/>
+      </clipPath>
+      <mask id="ko-head-hole-{{ uid }}" maskUnits="userSpaceOnUse" x="-100" y="-100" width="500" height="600">
+        <rect x="-100" y="-100" width="500" height="600" fill="#fff"/>
+        <circle cx="150" cy="275" r="50" fill="#000"/>
+        <!-- The K as a skeleton. Every bar is 40 wide with flat ends, exactly
+             like the original glyph; the circles hide the joints when limbs
+             rotate. Hip joint at (148, 88.7), knee of the free leg at (148, 128),
+             foot of the standing leg at (148, 203). -->
+        <g class="ko-k" fill="#000" stroke="#000" stroke-width="40" stroke-linecap="butt">
+          <line x1="148" y1="88.7" x2="148" y2="203"/>                                <!-- standing leg -->
+          <g class="ko-arm-r"><line x1="148" y1="88.7" x2="189.2" y2="65"/></g>          <!-- arm, upper right -->
+          <g class="ko-arm-l"><line x1="148" y1="88.7" x2="79.8" y2="128"/></g>          <!-- arm, lower left -->
+          <g class="ko-leg-f"><line x1="148" y1="128" x2="227.8" y2="149.3"/></g>        <!-- free leg, right -->
+          <circle cx="148" cy="88.7" r="20" stroke="none"/>
+          <circle cx="148" cy="128" r="20" stroke="none"/>
+        </g>
+      </mask>
+    </defs>
+    <g mask="url(#ko-head-hole-{{ uid }})">
+      <g clip-path="url(#ko-pill-{{ uid }})">
+        {%- comment -%} Rainbow is parked for now: swap the two fills below to bring it back. {%- endcomment -%}
+        <rect class="ko-wave" x="-400" y="-300" width="1100" height="1000" fill="currentColor"/>
+        {%- comment -%} <rect class="ko-wave" x="-400" y="-300" width="1100" height="1000" fill="url(#ko-rainbow-{{ uid }})"/> {%- endcomment -%}
+      </g>
+    </g>
+  </svg>
+</a>

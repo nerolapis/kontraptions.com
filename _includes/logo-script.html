@@ -1,0 +1,76 @@
+{%- comment -%} Animation for every KO logo on the page. Included once by the default layout. {%- endcomment -%}
+<script>
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.logo svg').forEach(animateLogo);
+  })();
+
+  // Every logo on the page gets its own loop with its own random choices, so two
+  // logos never move in step.
+  function animateLogo(svg) {
+    var k = svg.querySelector('.ko-k');
+    if (!k) return;
+    var armR = svg.querySelector('.ko-arm-r');
+    var armL = svg.querySelector('.ko-arm-l');
+    var legF = svg.querySelector('.ko-leg-f');
+
+    // How far each limb swings, as a multiple of the body's lean. Negative means
+    // the limb moves against the lean, like throwing your arms out to catch a
+    // fall. Flip the signs to have them follow the lean instead.
+    var ARM_R = -2.2, ARM_L = -1.4, LEG_F = -1.8;
+
+    // On top of that, each limb fidgets on its own: it drifts smoothly towards a
+    // random angle, picks a new one when it gets there, and so on. The range is
+    // the maximum extra degrees either way; the times bound one drift.
+    function fidget(range, minMs, maxMs) {
+      var f = { from: 0, to: 0, start: null, dur: 0 };
+      function pick() {
+        f.from = f.to;
+        f.to = (Math.random() * 2 - 1) * range;
+        f.dur = minMs + Math.random() * (maxMs - minMs);
+        f.start = null;
+      }
+      pick();
+      return function (now) {
+        if (f.start === null) f.start = now;
+        var t = Math.min(1, (now - f.start) / f.dur);
+        var v = f.from + (f.to - f.from) * ease(t);
+        if (t >= 1) pick();
+        return v;
+      };
+    }
+    var fidgetArmR = fidget(6, 900, 1800);
+    var fidgetArmL = fidget(5.5, 900, 1800);
+    var fidgetLegF = fidget(5, 800, 1600);
+
+    var from = 0, to = 0, start = null, dur = 0, side = 1, hold = 0;
+    function nextSwing() {
+      from = to;
+      side = -side;
+      to = side * (2.5 + Math.random() * 3.5);   // lean 2.5 to 6 degrees, alternating sides
+      dur = 1400 + Math.random() * 400;          // 1.4 to 1.8 s per swing
+      hold = 100 + Math.random() * 300;          // 0.1 to 0.4 s pause before the swing
+      start = null;
+    }
+    // Sine ease-in-out: eases at both ends without dwelling there. Swings chain
+    // back to back with no pause; the turnaround itself reads as the stop.
+    function ease(t) { return 0.5 - 0.5 * Math.cos(Math.PI * t); }
+    function rot(el, deg, cx, cy) {
+      el.setAttribute('transform', 'rotate(' + deg.toFixed(3) + ' ' + cx + ' ' + cy + ')');
+    }
+    function frame(now) {
+      if (start === null) start = now;
+      // The pause comes first: the figure holds its lean, limbs keep fidgeting.
+      var t = Math.max(0, Math.min(1, (now - start - hold) / dur));
+      var a = from + (to - from) * ease(t);
+      rot(k, a, 148, 203);                                   // whole figure pivots on the foot
+      rot(armR, ARM_R * a + fidgetArmR(now), 148, 88.7);     // arms swing from the hip joint
+      rot(armL, ARM_L * a + fidgetArmL(now), 148, 88.7);
+      rot(legF, LEG_F * a + fidgetLegF(now), 148, 128);      // free leg swings from its knee
+      if (t >= 1) nextSwing();
+      requestAnimationFrame(frame);
+    }
+    nextSwing();
+    requestAnimationFrame(frame);
+  }
+</script>

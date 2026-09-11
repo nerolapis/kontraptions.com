@@ -6,7 +6,7 @@ cover: /assets/img/colon-cover.png
 cover_style: photo
 image: /assets/img/colon-icon.png
 image_style: icon
-topics: [no-internet-apps]
+topics: [never-phones-home]
 version: "1.0"
 order: 1
 links:

@@ -1,0 +1,32 @@
+{%- comment -%}
+A big emoji greeting on the home page, different on every visit. The emoji are
+dealt from a shuffled deck kept in localStorage, so a visitor sees each one
+once before any repeats; when the deck is empty it is reshuffled. The 👋 in
+the markup is what shows without JavaScript or storage.
+{%- endcomment -%}
+<p class="greeting" role="img" aria-label="Hello">👋</p>
+<script>
+  (function () {
+    var all = ['👋', '🥳', '🖖', '🫂', '✌️', '🤙', '🙌', '🤗', '🎉', '👾', '🤖', '🫶', '🙃', '🤌', '☕', '🧑‍🚀', '🎈', '🪩', '🛸'];
+    var el = document.querySelector('.greeting');
+    if (!el) return;
+    var KEY = 'ko-greetings-deck';
+    function shuffled() {
+      var d = all.slice();
+      for (var i = d.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = d[i]; d[i] = d[j]; d[j] = t;
+      }
+      return d;
+    }
+    var deck = null;
+    try { deck = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    // Drop anything that is no longer in the list, so edits to `all` take effect.
+    if (!Array.isArray(deck)) deck = [];
+    deck = deck.filter(function (g) { return all.indexOf(g) !== -1; });
+    if (deck.length === 0) deck = shuffled();
+    var pick = deck.pop();
+    try { localStorage.setItem(KEY, JSON.stringify(deck)); } catch (e) {}
+    el.textContent = pick;
+  })();
+</script>

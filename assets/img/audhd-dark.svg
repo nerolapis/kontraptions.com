@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 478 276" role="img" aria-label="AuDHD: the periodic-table tile for gold, Au 79, followed by DHD">
+  <g fill="none">
+    <rect x="67" y="75" width="132" height="132" rx="14" stroke="#FFFFFF" stroke-width="4"/>
+    <text font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" font-size="80" fill="#FFFFFF"><tspan x="81.88" y="164">Au</tspan></text>
+    <text font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" font-size="80" fill="#FFFFFF"><tspan x="211.08" y="164">DHD</tspan></text>
+    <text font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" fill="#FFFFFF"><tspan x="79.104" y="99">79</tspan></text>
+    <text font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" fill="#FFFFFF"><tspan x="115.816" y="191">Gold</tspan></text>
+  </g>
+</svg>

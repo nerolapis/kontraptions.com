@@ -3,7 +3,7 @@ layout: default
 ---
 <p class="kicker">Topic</p>
 <h1>{{ page.title }}</h1>
-{% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+{% if page.tagline %}<p class="tagline topic-tagline">{{ page.tagline }}</p>{% endif %}
 
 {{ content }}
 
@@ -15,5 +15,3 @@ layout: default
   <p class="muted">Nothing here yet.</p>
 {% endif %}
 
-{% assign home = "/" %}{% if site.coming_soon %}{% assign home = "/preview/" %}{% endif %}
-<p class="back"><a href="{{ home | relative_url }}">&larr; All projects</a></p>

@@ -1,0 +1,7 @@
+{%- comment -%} Usage: {% include author-link.html link=l %} — renders one entry of site.data.author.links {%- endcomment -%}
+{%- assign l = include.link -%}
+{%- if l.email_user -%}
+<a href="#" data-eu="{{ l.email_user }}" data-ed="{{ l.email_domain }}" rel="nofollow">{{ l.label }}</a>
+{%- elsif l.url and l.url != "" -%}
+<a href="{{ l.url }}">{{ l.label }}</a>
+{%- endif -%}

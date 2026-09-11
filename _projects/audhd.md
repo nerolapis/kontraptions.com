@@ -1,24 +1,20 @@
 ---
-title: AuDHD
+title: AuDHD (Dark BG Variant)
 kind: T-shirt
-tagline: The gold standard of neurodivergence.
-cover: /assets/img/audhd-cover.png
+tagline: The gold standard of neurodivergence. White print for dark shirts.
+cover: /assets/img/audhd-dark-cover.svg
 cover_style: photo
 topics: [tshirts]
 order: 2
 links:
-  - label: Buy the shirt
-    url: "#"
+  - label: Buy on Redbubble
+    url: https://www.redbubble.com/shop/ap/181569426
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. A periodic-table take on AuDHD, printed on a plain black tee. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+{% include audhd-story.md %}
 
-## The design
+<figure class="art on-dark"><img src="{{ '/assets/img/audhd-dark.svg' | relative_url }}" alt="The AuDHD design in white"></figure>
 
-![The AuDHD design: the periodic-table tile for gold, Au 79, followed by DHD](/assets/img/audhd-design.png)
+This is the white version, for black and other dark shirts. There is also a [black version for light shirts]({{ '/projects/audhd-light/' | relative_url }}).
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-
-## Where to get it
-
-Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur. A shop link will go here.
+![The white AuDHD design on a black t-shirt]({{ '/assets/img/audhd-cover.png' | relative_url }})

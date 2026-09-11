@@ -3,6 +3,7 @@
 {% if include.topics %}
   {% for slug in include.topics %}{% assign t = site.topics | where: "slug", slug | first %}{% if t %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif %}{% endfor %}
 {% else %}
-  {% assign all = site.topics | sort: "order" %}{% for t in all %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endfor %}
+  {%- comment -%} Topics with no projects are skipped, so a parked section does not advertise itself. {%- endcomment -%}
+  {% assign all = site.topics | sort: "order" %}{% for t in all %}{% assign n = site.projects | where_exp: "p", "p.topics contains t.slug" | size %}{% if n > 0 %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif %}{% endfor %}
 {% endif %}
 </p>

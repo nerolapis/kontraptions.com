@@ -1,7 +1,7 @@
 ---
-title: No Internet Apps
-slug: no-internet-apps
-tagline: Software that works with the cable unplugged.
+title: Never Phones Home
+slug: never-phones-home
+tagline: Apps that never call home, never tattle, never wonder what you're up to. Pull the network cable; they won't notice.
 order: 1
 ---
 

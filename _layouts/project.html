@@ -10,17 +10,47 @@ layout: default
       <img class="{{ style }}" src="{{ img | relative_url }}" alt="{{ page.title }}">
     </span>
     {% endif %}
-    <div>
-      <p class="kicker">{{ page.kind }}</p>
-      <h1>{{ page.title }}</h1>
-      {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+    <div class="project-info">
+      {%- comment -%}
+      Topic pills and the kind side by side above the title. The kind is dropped
+      when it just repeats a topic (T-shirt under T-Shirts, Hardware under Hardware).
+      {%- endcomment -%}
+      {%- assign show_kind = false -%}
+      {%- if page.kind -%}
+        {%- assign show_kind = true -%}
+        {%- assign kind_key = page.kind | downcase | remove: "-" | remove: " " -%}
+        {%- assign kind_len = kind_key.size | minus: 1 -%}
+        {%- assign kind_singular = kind_key | slice: 0, kind_len -%}
+        {%- for slug in page.topics -%}
+          {%- assign t = site.topics | where: "slug", slug | first -%}
+          {%- if t -%}
+            {%- assign topic_key = t.title | downcase | remove: "-" | remove: " " -%}
+            {%- assign topic_len = topic_key.size | minus: 1 -%}
+            {%- assign topic_singular = topic_key | slice: 0, topic_len -%}
+            {%- if kind_key == topic_key or kind_singular == topic_key or kind_key == topic_singular -%}
+              {%- assign show_kind = false -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <div class="project-meta">
+        {%- for slug in page.topics -%}
+          {%- assign t = site.topics | where: "slug", slug | first -%}
+          {%- if t %}<a class="chip" href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif -%}
+        {%- endfor -%}
+        {%- if show_kind %}<span class="kicker">{{ page.kind }}</span>{% endif %}
+      </div>
+      <div class="project-title">
+        <h1>{{ page.title }}</h1>
+        {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+      </div>
       {% if page.version %}
       <p class="version">Version {{ page.version }}{% if page.released %}, released {{ page.released | date: "%-d %B %Y" }}{% endif %}</p>
       {% endif %}
-      {% if page.topics %}{% include topic-chips.html topics=page.topics %}{% endif %}
       {% if page.links %}
       <p class="project-links">
-        {% for l in page.links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}
+        {%- comment -%} Links to other sites open in a new tab; same-site links stay in this one. {%- endcomment -%}
+        {% for l in page.links %}<a href="{{ l.url }}"{% if l.url contains "://" %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}</a>{% endfor %}
       </p>
       {% endif %}
     </div>
@@ -28,6 +58,4 @@ layout: default
 
   {{ content }}
 
-  {% assign home = "/" %}{% if site.coming_soon %}{% assign home = "/preview/" %}{% endif %}
-<p class="back"><a href="{{ home | relative_url }}">&larr; All projects</a></p>
 </article>
