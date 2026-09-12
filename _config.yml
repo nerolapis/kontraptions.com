@@ -10,6 +10,10 @@ coming_soon: false
 
 markdown: kramdown
 
+# Generates /sitemap.xml. Ships with GitHub Pages, no install needed.
+plugins:
+  - jekyll-sitemap
+
 # Author name, bio, and links live in _data/author.yml.
 
 # Every file in _projects/ becomes a page at /projects/<filename>/
