@@ -58,4 +58,22 @@ layout: default
 
   {{ content }}
 
+  {%- comment -%}
+  Optional gallery from front matter: a grid of product shots. Fields: image,
+  label, url (optional; falls back to the project's first link, the shop page).
+  {%- endcomment -%}
+  {%- if page.gallery %}
+  {%- assign shop = page.links | first %}
+  <ul class="gallery">
+    {%- for g in page.gallery %}
+    {%- assign href = g.url | default: shop.url %}
+    <li>
+      <a href="{{ href }}"{% if href contains "://" %} target="_blank" rel="noopener"{% endif %}>
+        <img src="{{ g.image | relative_url }}" alt="{{ page.title }}, {{ g.label }}" loading="lazy">
+        <span>{{ g.label }}</span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
 </article>

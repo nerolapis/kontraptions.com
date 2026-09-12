@@ -432,8 +432,52 @@ h3 {
   border-radius: var(--radius);
 }
 
+.project figure.art a { display: block; }
 .project figure.art img { display: block; width: 100%; border-radius: 0; }
 .project figure.on-dark { background: #1c1c1e; }
+
+/* Product gallery at the bottom of a project page */
+.gallery {
+  list-style: none;
+  padding: 0;
+  margin: calc(var(--unit) * 1.5) 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--unit);
+}
+
+@media (max-width: 26rem) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+}
+
+.gallery a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: var(--unit);
+  text-align: center;
+}
+
+.gallery a:hover { color: var(--accent); }
+
+.gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: var(--half);
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.gallery a:hover img {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.gallery span { display: block; }
 .project figure.on-light { background: var(--card); border: 1px solid var(--rule); }
 
 pre, code {
