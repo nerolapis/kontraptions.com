@@ -8,10 +8,11 @@ image: /assets/img/colon-icon.png
 image_style: icon
 topics: [never-phones-home]
 version: "1.0"
+released: 2026-09-12
 order: 1
 links:
   - label: Download for macOS
-    url: "#"
+    url: /downloads/Colon.dmg
 ---
 
 Colon is an emoji picker that lives in your keyboard instead of in a menu. Type `:` followed by a word, anywhere you can type, and a little panel appears next to your cursor with matching emoji. Press return and the emoji lands exactly where the colon was. That's the whole trick, and it works in every app: Mail, Slack, Notes, and that text field in the corner of a web page you've never noticed before.
