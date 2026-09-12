@@ -6,7 +6,7 @@ baseurl: ""
 # While true: the root shows a coming-soon page, every page is marked noindex,
 # robots.txt blocks crawlers, and the real home page lives at /preview/.
 # Set to false to launch.
-coming_soon: true
+coming_soon: false
 
 markdown: kramdown
 
