@@ -1,0 +1,8 @@
+{%- comment -%}
+Embedded YouTube player, from the no-cookie domain so it sets no tracking
+cookies until the visitor interacts with it.
+Usage: {% include video.html id=page.video title=page.title %}
+{%- endcomment -%}
+<div class="video">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ include.id }}?rel=0" title="{{ include.title }}" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div>

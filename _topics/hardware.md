@@ -1,8 +1,9 @@
 ---
 title: Hardware
 slug: hardware
+icon: "🔩"
 tagline: Things with wires, buttons, and the occasional smell of solder.
-order: 2
+order: 4
 sitemap: false   # nothing in it yet; remove this line when DialPix returns
 ---
 

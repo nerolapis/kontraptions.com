@@ -120,6 +120,7 @@ main { flex: 1 0 auto; }
 
 .sections a:hover { color: var(--accent); }
 .sections a.active { color: var(--fg); font-weight: 600; }
+.sections a.debug { color: #e0a800; }   /* local-only styleguide link */
 
 main a { color: var(--accent); }
 
@@ -287,18 +288,66 @@ h3 {
 
 .cover.icon { background: none; border-radius: 0; }
 
+/* Play badge on video cards */
+.cover { position: relative; }
+
+.play-badge {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.play-badge svg { width: 24px; height: 24px; margin-left: 3px; }
+
+.project-grid a:hover .play-badge {
+  background: var(--accent);
+  transform: scale(1.06);
+}
+
+/* Embedded video on talk pages */
+.video {
+  aspect-ratio: 16 / 9;
+  margin: 0 0 var(--unit);
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #000;
+}
+
+.video iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* Project grid: three across, then two, then one */
 .project-grid {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, 1fr): a column must be allowed to shrink below its longest
+     word, or one long title widens it at the expense of the other two. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--unit);
 }
 
+/* Pinned overflow: on narrow screens the extra pinned cards leave the pinned
+   row and appear in the dated list instead. */
+.project-grid .narrow-only { display: none; }
+
 @media (max-width: 40rem) {
-  .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-grid .wide-only { display: none; }
+  .project-grid .narrow-only { display: block; }
 }
 
 @media (max-width: 26rem) {
@@ -325,7 +374,7 @@ h3 {
 }
 
 .project-grid .cover { margin-bottom: var(--half); }
-.project-grid strong { font-size: 1.1rem; line-height: var(--unit); }
+.project-grid strong { font-size: 1.1rem; line-height: var(--unit); overflow-wrap: anywhere; }
 .project-grid .tagline { font-size: 0.95rem; line-height: var(--unit); }
 
 /* Topic chips */
@@ -360,6 +409,16 @@ h3 {
 }
 
 .chips a:hover, .project-meta .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Topic icons: an emoji before the topic name, in chips, kickers, and titles */
+.ticon {
+  display: inline-block;
+  margin-right: 0.4em;
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+h1 .ticon { margin-right: 0.35em; }
 
 .muted { color: var(--muted); }
 
@@ -426,15 +485,41 @@ h3 {
 .project img { max-width: 100%; border-radius: 8px; }
 
 /* Artwork shown on the background it is meant for */
-.project figure.art {
+figure.art {
   margin: 0 0 var(--unit);
   padding: var(--unit);
   border-radius: var(--radius);
 }
 
-.project figure.art a { display: block; }
-.project figure.art img { display: block; width: 100%; border-radius: 0; }
-.project figure.on-dark { background: #1c1c1e; }
+figure.art a { display: block; }
+figure.art img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: calc(var(--unit) * 16);   /* portrait artwork stays a reasonable height */
+  margin: 0 auto;
+  border-radius: 0;
+}
+figure.on-dark { background: #1c1c1e; }
+
+/* Screenshots with a caption */
+figure.shot { margin: 0 0 var(--unit); }
+
+figure.shot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+
+figure.shot figcaption {
+  margin-top: var(--half);
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: var(--unit);
+  color: var(--muted);
+}
 
 /* Product gallery at the bottom of a project page */
 .gallery {
@@ -478,7 +563,83 @@ h3 {
 }
 
 .gallery span { display: block; }
-.project figure.on-light { background: var(--card); border: 1px solid var(--rule); }
+figure.on-light { background: var(--card); border: 1px solid var(--rule); }
+
+/* Highlights, marker style. Use <mark>text</mark> in Markdown; add a colour
+   class for another pen: <mark class="pink">…</mark>. Colours: yellow
+   (default), pink, green, blue, purple, orange. */
+mark {
+  --hl: #fff3a3;
+  background: var(--hl);
+  color: inherit;
+  /* The padding around the text is a shadow spread, which paints outside the
+     box without taking layout space, so line heights do not change. */
+  box-shadow: 0 0 0 0.14em var(--hl);
+  margin: 0 0.14em;
+  border-radius: 0.15em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+mark.pink   { --hl: #ffd0e0; }
+mark.green  { --hl: #cdf3c6; }
+mark.blue   { --hl: #cfe6ff; }
+mark.purple { --hl: #e4d6ff; }
+mark.orange { --hl: #ffe0b8; }
+mark code   { background: transparent; padding: 0; }   /* let the highlight colour through */
+
+/* Long-form text elements, on the rhythm grid */
+blockquote {
+  margin: 0 0 var(--unit);
+  padding: 0 0 0 calc(var(--unit) - 3px);
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite { font-style: normal; font-size: 0.9rem; }
+blockquote cite::before { content: "— "; }
+
+hr {
+  height: 0;
+  margin: calc(var(--unit) * 1.5) 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+table {
+  width: 100%;
+  margin: 0 0 var(--unit);
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+th, td {
+  padding: 0 0.75rem;
+  line-height: calc(var(--unit) * 1.5);
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+}
+
+th { font-weight: 600; }
+td:first-child, th:first-child { padding-left: 0; }
+td:last-child, th:last-child { padding-right: 0; }
+
+del { color: var(--muted); }
+
+kbd {
+  display: inline-block;
+  padding: 0 0.4em;
+  font-family: inherit;
+  font-size: 0.85em;
+  line-height: 1.5em;
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--card);
+}
+
+li > ul, li > ol { margin: 0; }
 
 pre, code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -489,8 +650,11 @@ pre {
   padding: var(--half) 1rem;
   overflow-x: auto;
   background: #f0f0f0;
-  border-radius: 4px;
+  border-radius: 8px;
 }
+
+code { background: #f0f0f0; padding: 0.1em 0.35em; border-radius: 4px; }
+pre code { background: none; padding: 0; }
 
 footer {
   padding-top: calc(var(--unit) * 1.5);

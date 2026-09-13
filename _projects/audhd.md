@@ -4,8 +4,8 @@ kind: T-shirt
 tagline: The gold standard of neurodivergence. White print for dark shirts.
 cover: /assets/img/audhd-dark-cover.svg
 cover_style: photo
+date: 2026-06-16
 topics: [tshirts]
-order: 2
 links:
   - label: Buy on Redbubble
     url: https://www.redbubble.com/shop/ap/181569426

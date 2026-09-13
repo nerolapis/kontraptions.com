@@ -11,7 +11,7 @@
     <a class="crumb-home{% if on_home %} open{% endif %}" href="{{ home | relative_url }}" aria-label="Home">{% include icon-home.html %}</a>
     {%- if on_home == false and section %}
     {%- if page.collection %}
-    <a href="{{ home | append: '#projects' | relative_url }}">{{ section }}</a>
+    <a href="{{ home | relative_url }}">{{ section }}</a>
     {%- comment -%} A project shows its first topic as the crumb before its own name. {%- endcomment -%}
     {%- if page.collection == "projects" and page.topics.size > 0 %}
     {%- assign topic = site.topics | where: "slug", page.topics[0] | first %}
@@ -28,7 +28,10 @@
     {%- endif %}
   </nav>
   <nav class="sections" aria-label="Sections">
-    <a href="{{ home | append: '#projects' | relative_url }}"{% if on_home or section == "Projects" %} class="active"{% endif %}>Projects</a>
+    <a href="{{ home | relative_url }}"{% if on_home or section == "Projects" %} class="active"{% endif %}>Projects</a>
     <a href="{{ '/me/' | relative_url }}"{% if section == "Me" %} class="active"{% endif %}>Me</a>
+    {%- if site.debug %}
+    <a class="debug{% if section == "Styleguide" %} active{% endif %}" href="{{ '/styleguide/' | relative_url }}" title="Styleguide (local only)" aria-label="Styleguide">★</a>
+    {%- endif %}
   </nav>
 </header>

@@ -1,9 +1,9 @@
 {%- comment -%} Usage: {% include topic-chips.html topics=page.topics %} (omit topics to list them all) {%- endcomment -%}
 <p class="chips">
 {% if include.topics %}
-  {% for slug in include.topics %}{% assign t = site.topics | where: "slug", slug | first %}{% if t %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif %}{% endfor %}
+  {% for slug in include.topics %}{% assign t = site.topics | where: "slug", slug | first %}{% if t %}<a href="{{ t.url | relative_url }}">{% if t.icon %}<span class="ticon">{{ t.icon }}</span>{% endif %}{{ t.title }}</a>{% endif %}{% endfor %}
 {% else %}
   {%- comment -%} Topics with no projects are skipped, so a parked section does not advertise itself. {%- endcomment -%}
-  {% assign all = site.topics | sort: "order" %}{% for t in all %}{% assign n = site.projects | where_exp: "p", "p.topics contains t.slug" | size %}{% if n > 0 %}<a href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif %}{% endfor %}
+  {% assign all = site.topics | sort: "order" %}{% for t in all %}{% assign n = site.projects | where_exp: "p", "p.topics contains t.slug" | size %}{% if n > 0 %}<a href="{{ t.url | relative_url }}">{% if t.icon %}<span class="ticon">{{ t.icon }}</span>{% endif %}{{ t.title }}</a>{% endif %}{% endfor %}
 {% endif %}
 </p>

@@ -6,10 +6,11 @@ cover: /assets/img/colon-cover.png
 cover_style: photo
 image: /assets/img/colon-icon.png
 image_style: icon
+# Colon is ordered by its latest release; keep this equal to `released`.
+date: 2026-09-13
 topics: [never-phones-home]
-version: "1.0"
-released: 2026-09-12
-order: 1
+version: "1.0.1"
+released: 2026-09-13
 links:
   - label: Download for macOS
     url: /downloads/Colon.dmg
@@ -40,7 +41,15 @@ Colon lives in the menu bar and starts with your Mac if you like. It never steal
 
 ## Screenshots
 
-Screenshots will land here shortly.
+<figure class="shot">
+  <img src="{{ '/assets/img/colon/mail-wave@2x.png' | relative_url }}" alt="A Mail compose window. The subject reads Hello there :wave and Colon's panel lists waving hand, water wave, and other matches" width="596" height="738" loading="lazy">
+  <figcaption>Type <code>:wave</code> in the subject line of a mail, pick, done.</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="{{ '/assets/img/colon/duckduckgo-hieroglyph@2x.png' | relative_url }}" alt="The DuckDuckGo search box with :penis typed in it, and Colon's panel listing three matching Egyptian hieroglyphs" width="756" height="378" loading="lazy">
+  <figcaption>The whole Unicode library is in there. Yes, the hieroglyphs have proper names.</figcaption>
+</figure>
 
 ## Privacy
 

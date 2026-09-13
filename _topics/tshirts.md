@@ -1,6 +1,7 @@
 ---
 title: T-Shirts
 slug: tshirts
+icon: "👕"
 tagline: Jokes you can wear.
 order: 3
 ---

@@ -1,14 +1,22 @@
-{%- comment -%} Usage: {% include project-grid.html projects=some_list %} {%- endcomment -%}
+{%- comment -%} Usage: {% include project-grid.html projects=some_list %} (add keep_order=true to show them as given) {%- endcomment -%}
 <ul class="project-grid">
-{% assign list = include.projects | sort: "order" %}
+{%- comment -%} Newest first, by each project's `date`, unless keep_order is set. {%- endcomment -%}
+{% if include.keep_order %}{% assign list = include.projects %}{% else %}{% assign list = include.projects | sort: "date" | reverse %}{% endif %}
 {% for p in list %}
-  <li>
+  {%- comment -%} wide_only_from: items from this index only show on wide screens. narrow_only: items with these urls only show on narrow screens. {%- endcomment -%}
+  {%- assign li_class = "" %}
+  {%- if include.wide_only_from and forloop.index0 >= include.wide_only_from %}{% assign li_class = "wide-only" %}{% endif %}
+  {%- if include.narrow_only and include.narrow_only contains p.url %}{% assign li_class = "narrow-only" %}{% endif %}
+  <li{% if li_class != "" %} class="{{ li_class }}"{% endif %}>
     <a href="{{ p.url | relative_url }}">
       {% assign style = p.cover_style | default: 'photo' %}
       <span class="cover {{ style }}">
         <img class="{{ style }}" src="{{ p.cover | relative_url }}" alt="{{ p.title }}" loading="lazy">
+        {%- if p.video %}<span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>{% endif %}
       </span>
-      <span class="kicker">{{ p.kind }}</span>
+      {%- comment -%} The card label is the project's first topic, with its icon. {%- endcomment -%}
+      {%- assign t = site.topics | where: "slug", p.topics[0] | first %}
+      <span class="kicker">{% if t %}{% if t.icon %}<span class="ticon">{{ t.icon }}</span>{% endif %}{{ t.title }}{% else %}{{ p.kind }}{% endif %}</span>
       <strong>{{ p.title }}</strong>
       <span class="tagline">{{ p.tagline }}</span>
     </a>

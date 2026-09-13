@@ -1,6 +1,7 @@
 ---
 title: Never Phones Home
 slug: never-phones-home
+icon: "💾"
 tagline: Apps that never call home, never tattle, never wonder what you're up to. Pull the network cable; they won't notice.
 order: 1
 ---

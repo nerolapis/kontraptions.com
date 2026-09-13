@@ -1,7 +1,39 @@
 {% include greeting.html %}
 
+{%- comment -%}
+Pinned projects come from _data/pinned.yml, in that order, and are left out
+of the main list below.
+{%- endcomment -%}
+{%- assign pinned = "" | split: "" %}
+{%- for slug in site.data.pinned %}
+  {%- assign u = "/projects/" | append: slug | append: "/" %}
+  {%- assign p = site.projects | where: "url", u | first %}
+  {%- if p %}{% assign pinned = pinned | push: p %}{% endif %}
+{%- endfor %}
+{%- assign pinned_urls = pinned | map: "url" %}
+{%- comment -%}
+On narrow screens (two columns or fewer) only the first mobile_pins pinned
+projects stay pinned; the others fall back into the dated list below. Those
+"extra" pins are rendered in both places and CSS shows only one copy.
+{%- endcomment -%}
+{%- assign mobile_pins = 2 %}
+{%- assign extra = pinned | slice: mobile_pins, 99 %}
+{%- assign extra_urls = extra | map: "url" %}
+{%- assign rest = "" | split: "" %}
+{%- for p in site.projects %}
+  {%- if extra_urls contains p.url %}{% assign rest = rest | push: p %}
+  {%- elsif pinned_urls contains p.url %}
+  {%- else %}{% assign rest = rest | push: p %}{% endif %}
+{%- endfor %}
+
+{%- if pinned.size > 0 %}
+<h2 id="pinned"><span class="ticon">📌</span>Pinned</h2>
+
+{% include project-grid.html projects=pinned keep_order=true wide_only_from=mobile_pins %}
+{%- endif %}
+
 <h2 id="projects">Projects</h2>
 
 {% include topic-chips.html %}
 
-{% include project-grid.html projects=site.projects %}
+{% include project-grid.html projects=rest narrow_only=extra_urls %}

@@ -36,7 +36,7 @@ layout: default
       <div class="project-meta">
         {%- for slug in page.topics -%}
           {%- assign t = site.topics | where: "slug", slug | first -%}
-          {%- if t %}<a class="chip" href="{{ t.url | relative_url }}">{{ t.title }}</a>{% endif -%}
+          {%- if t %}<a class="chip" href="{{ t.url | relative_url }}">{% if t.icon %}<span class="ticon">{{ t.icon }}</span>{% endif %}{{ t.title }}</a>{% endif -%}
         {%- endfor -%}
         {%- if show_kind %}<span class="kicker">{{ page.kind }}</span>{% endif %}
       </div>
@@ -46,6 +46,8 @@ layout: default
       </div>
       {% if page.version %}
       <p class="version">Version {{ page.version }}{% if page.released %}, released {{ page.released | date: "%-d %B %Y" }}{% endif %}</p>
+      {% elsif page.duration %}
+      <p class="version">{{ page.duration }}{% if page.date %}, {{ page.date | date: "%B %Y" }}{% endif %}</p>
       {% endif %}
       {% if page.links %}
       <p class="project-links">
@@ -55,6 +57,10 @@ layout: default
       {% endif %}
     </div>
   </header>
+
+  {%- if page.video %}
+  {% include video.html id=page.video title=page.title %}
+  {%- endif %}
 
   {{ content }}
 
