@@ -7,7 +7,8 @@ cover_style: photo
 date: 2026-09-13
 topics: [tshirts]
 links:
-  - label: Buy on Redbubble
+  - label: Soon on Redbubble
+    disabled: true   # listing not public yet; remove this line and restore the label when it is
     url: https://www.redbubble.com/shop/ap/183825812
 # Product mock-ups shown at the bottom of the page. Each links to its own product
 # page; an entry without a url falls back to the first link above.

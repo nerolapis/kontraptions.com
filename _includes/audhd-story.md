@@ -12,6 +12,6 @@ A few months later I was diagnosed too. We never had matching t-shirts. I guess 
 
 ## The design
 
-<figure class="art {{ include.style }}"><a href="{{ shop.url }}" target="_blank" rel="noopener"><img src="{{ include.art | relative_url }}" alt="The AuDHD design"></a></figure>
+<figure class="art {{ include.style }}">{% if shop.disabled %}<img src="{{ include.art | relative_url }}" alt="The AuDHD design">{% else %}<a href="{{ shop.url }}" target="_blank" rel="noopener"><img src="{{ include.art | relative_url }}" alt="The AuDHD design"></a>{% endif %}</figure>
 
 Au is gold on the periodic table, element 79. Put it in front of DHD and you get AuDHD, the name for having both autism and ADHD. The gold standard of neurodivergence, if you like.

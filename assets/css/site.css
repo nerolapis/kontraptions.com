@@ -482,6 +482,29 @@ h1 .ticon { margin-right: 0.35em; }
   transform: translateY(-1px);
 }
 
+/* A link marked disabled in front matter: same pill, greyed out, not clickable */
+.project-links .disabled {
+  display: inline-block;
+  margin: 0 0.5rem 0 0;
+  padding: 0.375rem 1.1rem;
+  line-height: var(--unit);
+  background: var(--rule);
+  color: var(--muted);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: default;
+}
+
+/* Gallery tile without a link (shop not live yet) */
+.gallery .tile {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: var(--unit);
+  text-align: center;
+}
+
 .project img { max-width: 100%; border-radius: 8px; }
 
 /* Artwork shown on the background it is meant for */

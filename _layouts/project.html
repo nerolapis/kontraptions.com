@@ -52,7 +52,7 @@ layout: default
       {% if page.links %}
       <p class="project-links">
         {%- comment -%} Links to other sites open in a new tab; same-site links stay in this one. {%- endcomment -%}
-        {% for l in page.links %}<a href="{{ l.url }}"{% if l.url contains "://" %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}</a>{% endfor %}
+        {% for l in page.links %}{% if l.disabled %}<span class="disabled" aria-disabled="true">{{ l.label }}</span>{% else %}<a href="{{ l.url }}"{% if l.url contains "://" %} target="_blank" rel="noopener"{% endif %}>{{ l.label }}</a>{% endif %}{% endfor %}
       </p>
       {% endif %}
     </div>
@@ -73,12 +73,22 @@ layout: default
   <ul class="gallery">
     {%- for g in page.gallery %}
     {%- assign href = g.url | default: shop.url %}
+    {%- comment -%} No links at all while the shop is disabled, even for tiles with their own url. {%- endcomment -%}
+    {%- if shop.disabled %}
+    <li>
+      <span class="tile">
+        <img src="{{ g.image | relative_url }}" alt="{{ page.title }}, {{ g.label }}" loading="lazy">
+        <span>{{ g.label }}</span>
+      </span>
+    </li>
+    {%- else %}
     <li>
       <a href="{{ href }}"{% if href contains "://" %} target="_blank" rel="noopener"{% endif %}>
         <img src="{{ g.image | relative_url }}" alt="{{ page.title }}, {{ g.label }}" loading="lazy">
         <span>{{ g.label }}</span>
       </a>
     </li>
+    {%- endif %}
     {%- endfor %}
   </ul>
   {%- endif %}
