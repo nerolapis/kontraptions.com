@@ -5,7 +5,7 @@ The artwork links to the page's first link, the shop page.
 TODO: the story below is a placeholder written by Claude; replace it with your own.
 {%- endcomment -%}
 {%- assign shop = page.links | first -%}
-Three ducks in suits and skinny red ties, walking towards you in slow motion. You know the scene. You may not have pictured it with ducks.
+Three ducks in suits and skinny red ties, walking towards you in slow motion. You know the scene. But with ducks instead of dogs.
 
 ## The design
 

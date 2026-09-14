@@ -6,7 +6,7 @@ Usage: {% include audhd-story.md art="/assets/img/audhd-dark.svg" style="on-dark
 The artwork links to the page's first link, the shop page.
 {%- endcomment -%}
 {%- assign shop = page.links | first -%}
-A few months ago my wife was diagnosed with AuDHD. I wanted to celebrate that with a t-shirt, and I was surprised to find that nobody on the whole internet had made this design. Or at least nobody I could find. So I made one.
+A few months ago my wife was diagnosed with AuDHD. I wanted to celebrate that with a t-shirt, and I was surprised to find that nobody on the whole internet had made this design. Or at least nobody I could find. So I made it.
 
 A few months later I was diagnosed too. We never had matching t-shirts. I guess now we do.
 

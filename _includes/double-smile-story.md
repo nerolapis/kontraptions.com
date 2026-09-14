@@ -11,4 +11,4 @@ Two smileys, standing a little too close, until they are one. Three eyes, one wo
 
 <figure class="art {{ include.style }}">{% if shop.disabled %}<img src="{{ include.art | relative_url }}" alt="Two overlapping smiley faces merged into one, with three eyes and a wavy mouth">{% else %}<a href="{{ shop.url }}" target="_blank" rel="noopener"><img src="{{ include.art | relative_url }}" alt="Two overlapping smiley faces merged into one, with three eyes and a wavy mouth"></a>{% endif %}</figure>
 
-A single flat shape, no outlines, no gradients. It reads as one face from across the room and as two from up close, which is roughly how it feels to be in two moods at once.
+It reads as one face from across the room and as two from up close, which is roughly how it feels to be in two moods at once.

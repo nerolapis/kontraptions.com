@@ -2,7 +2,7 @@
 title: The Sacred Secret Behind Our App's Speed
 kind: Talk
 tagline: Pragma Conference 2025, with Matteo Rattotti.
-cover: /assets/img/talks/speed-2025-cover.jpg
+cover: /assets/img/talks/sacred-secret-card.jpg
 cover_style: photo
 # Pragma Conference 2025, second day.
 date: 2025-10-31

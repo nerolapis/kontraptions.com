@@ -2,10 +2,11 @@
 layout: default
 ---
 <article class="project">
-  <header class="project-header">
+  {%- comment -%} Talk pages skip the header cover: the video right below is the real thing. {%- endcomment -%}
+  <header class="project-header{% if page.video %} no-cover{% endif %}">
     {% assign img = page.image | default: page.cover %}
     {% assign style = page.image_style | default: page.cover_style | default: 'photo' %}
-    {% if img %}
+    {% if img and page.video == nil %}
     <span class="cover {{ style }}">
       <img class="{{ style }}" src="{{ img | relative_url }}" alt="{{ page.title }}">
     </span>

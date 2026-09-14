@@ -162,7 +162,7 @@ main {
 
 /* Home page greeting: a single big emoji, eight units tall. */
 .greeting {
-  margin: var(--half) 0 var(--unit);
+  margin: calc(var(--unit) * 1.5) 0 calc(var(--unit) * 2);
   text-align: center;
   font-size: 11rem;
   line-height: calc(var(--unit) * 8);
@@ -450,6 +450,10 @@ h1 .ticon { margin-right: 0.35em; }
 }
 
 .project-title .tagline { margin: 0; }
+
+/* Without a cover the info column just follows its content */
+.project-header.no-cover { margin-bottom: var(--unit); }
+.project-header.no-cover .project-info { min-height: 0; }
 
 .version {
   margin: var(--half) 0 0;
