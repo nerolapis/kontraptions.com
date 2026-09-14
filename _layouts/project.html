@@ -2,11 +2,15 @@
 layout: default
 ---
 <article class="project">
-  {%- comment -%} Talk pages skip the header cover: the video right below is the real thing. {%- endcomment -%}
-  <header class="project-header{% if page.video %} no-cover{% endif %}">
-    {% assign img = page.image | default: page.cover %}
-    {% assign style = page.image_style | default: page.cover_style | default: 'photo' %}
-    {% if img and page.video == nil %}
+  {%- comment -%}
+  The header shows an image only when the project declares `image` in its front
+  matter (Colon does, with its icon). Shirts show their artwork in the body and
+  talks show the video, so they set none and the header is text only.
+  {%- endcomment -%}
+  <header class="project-header{% unless page.image %} no-cover{% endunless %}">
+    {% assign img = page.image %}
+    {% assign style = page.image_style | default: 'photo' %}
+    {% if img %}
     <span class="cover {{ style }}">
       <img class="{{ style }}" src="{{ img | relative_url }}" alt="{{ page.title }}">
     </span>
