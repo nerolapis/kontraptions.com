@@ -8,6 +8,7 @@
   {% if site.coming_soon or page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <link rel="icon" href="{{ site.data.author.avatar | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  {% include analytics.html %}
 </head>
 <body>
   {% assign bare = false %}{% if site.coming_soon and page.url == "/" %}{% assign bare = true %}{% endif %}

@@ -1,0 +1,10 @@
+{%- comment -%}
+GoatCounter: cookieless, no personal data, so no consent banner is needed.
+Loaded only when `goatcounter` is set in _config.yml. The local preview
+overrides it to empty (see _config.dev.yml), so your own browsing is never
+counted. The script URL is the https form of GoatCounter's protocol-relative
+one; the site is https-only, so they behave identically.
+{%- endcomment -%}
+{%- if site.goatcounter and site.goatcounter != "" %}
+<script data-goatcounter="{{ site.goatcounter }}" async src="https://gc.zgo.at/count.js"></script>
+{%- endif %}

@@ -10,6 +10,11 @@ coming_soon: false
 
 markdown: kramdown
 
+# GoatCounter endpoint, the "count" URL from your GoatCounter site settings.
+# Empty means no analytics script is loaded at all. The local preview forces it
+# empty in _config.dev.yml, so localhost visits are never counted.
+goatcounter: "https://nerolapis.goatcounter.com/count"
+
 # Generates /sitemap.xml. Ships with GitHub Pages, no install needed.
 plugins:
   - jekyll-sitemap
