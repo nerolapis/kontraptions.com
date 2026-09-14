@@ -16,7 +16,7 @@ links:
     url: /downloads/Colon.dmg
 ---
 
-Colon is an emoji picker that lives in your keyboard instead of in a menu. Type `:` followed by a word, anywhere you can type, and a little panel appears next to your cursor with matching emoji. Press return and the emoji lands exactly where the colon was. That's the whole trick, and it works in every app: Mail, Slack, Notes, and that text field in the corner of a web page you've never noticed before.
+Colon is an <mark class="pink">emoji picker</mark> that lives in your keyboard instead of in a menu. Type `:` followed by a word, anywhere you can type, and a little panel appears next to your cursor with matching emoji. Press return and the emoji lands exactly where the colon was. That's the whole trick, and it works in every app: Mail, Slack, Notes, and that text field in the corner of a web page you've never noticed before.
 
 ## How it works
 
@@ -53,11 +53,13 @@ Colon lives in the menu bar and starts with your Mac if you like. It never steal
 
 ## Privacy
 
-Colon collects nothing. No network, no analytics, no account. Your emoji habits stay on your Mac, in a plain local database you can delete any time.
+<mark class="green">Colon collects nothing.</mark> No network, no analytics, no account. Your emoji habits stay on your Mac, in a plain local database you can delete any time.
 
 It does need two macOS permissions to do its job, and it explains both on first launch: **Input Monitoring**, to notice when you type the trigger character, and **Accessibility**, to find your cursor and insert the character you picked. That's what they're for, and nothing else.
 
 In short--it sees everything you type, but it will never tell it to anyone.
+
+The flip side of never going online is that Colon <mark class="orange">will not update itself</mark>. When a new version is out, this page will say so; come back now and then and grab it. That goes for every app in [Never Phones Home]({{ '/topics/never-phones-home/' | relative_url }}).
 
 ## Requirements
 
