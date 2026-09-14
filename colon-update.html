@@ -1,0 +1,73 @@
+---
+title: Colon update check
+permalink: /projects/colon/update/
+under: colon    # hangs this page off the Colon project in the breadcrumb
+crumb: Update
+noindex: true
+sitemap: false
+---
+{%- comment -%}
+Opened by a button inside Colon, as /projects/colon/update/?v=1.0.1
+Colon itself never makes the request: the app opens the browser and the visitor
+does, which is what keeps the never-phones-home promise intact.
+
+The answer comes from downloads/Colon-latest.json, the same manifest published
+with every release, so nothing here has to be updated when you ship.
+{%- endcomment -%}
+<section class="update" role="status" aria-live="polite">
+  <p class="update-verdict">…</p>
+  <p class="update-detail">Checking for a newer version.</p>
+  <p class="update-action"></p>
+</section>
+
+<script>
+  (function () {
+    var verdict = document.querySelector('.update-verdict');
+    var detail  = document.querySelector('.update-detail');
+    var action  = document.querySelector('.update-action');
+
+    var mine = new URLSearchParams(location.search).get('v');
+
+    // Numeric, component by component, so 1.0.10 beats 1.0.9.
+    function cmp(a, b) {
+      var pa = String(a).split('.'), pb = String(b).split('.');
+      for (var i = 0; i < Math.max(pa.length, pb.length); i++) {
+        var x = parseInt(pa[i], 10) || 0, y = parseInt(pb[i], 10) || 0;
+        if (x !== y) return x < y ? -1 : 1;
+      }
+      return 0;
+    }
+
+    function show(cls, big, text, link, spoken) {
+      document.querySelector('.update').className = 'update ' + cls;
+      verdict.textContent = big;
+      // An emoji on its own means nothing read aloud, so give it a label.
+      if (spoken) { verdict.setAttribute('role', 'img'); verdict.setAttribute('aria-label', spoken); }
+      else { verdict.removeAttribute('role'); verdict.removeAttribute('aria-label'); }
+      detail.innerHTML = text;
+      action.innerHTML = link || '';
+    }
+
+    // Skip any cached copy: a check moments after a release must not lie.
+    fetch('{{ "/downloads/Colon-latest.json" | relative_url }}?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (d) {
+        var download = '<a href="{{ "/downloads/" | relative_url }}' + d.file + '">Download ' + d.version + '</a>';
+        var order = mine ? cmp(mine, d.version) : null;
+
+        if (!mine) {
+          show('neutral', d.version, 'is the current version of Colon.', download);
+        } else if (order === 0) {
+          show('good', '\uD83C\uDF89', 'You are running ' + mine + ', the latest version.', '', 'Up to date');
+        } else if (order < 0) {
+          show('stale', '\uD83D\uDD04', 'You are running ' + mine + '. Version ' + d.version + ' is out.', download, 'Update available');
+        } else {
+          show('neutral', '\uD83D\uDD2E', 'You are running ' + mine + ', newer than the public ' + d.version + '.', '', 'Ahead of the public release');
+        }
+      })
+      .catch(function () {
+        show('neutral', 'Hmm', 'The check could not run just now. Try again in a moment, or see the '
+          + '<a href="{{ "/projects/colon/" | relative_url }}">Colon page</a>.', '');
+      });
+  })();
+</script>

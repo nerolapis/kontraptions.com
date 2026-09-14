@@ -1,7 +1,19 @@
 {%- assign home = "/" -%}{%- if site.coming_soon -%}{%- assign home = "/preview/" -%}{%- endif -%}
-{%- assign section = page.section -%}
-{%- if page.collection == "projects" or page.collection == "topics" -%}{%- assign section = "Projects" -%}{%- endif -%}
 {%- assign on_home = false -%}{%- if page.url == home -%}{%- assign on_home = true -%}{%- endif -%}
+{%- comment -%}
+Which project this page belongs to: itself if it is one, or the project named
+by `under` in its front matter (a project slug), which is how a sub-page such
+as the Colon update check hangs off Colon and keeps Colon clickable.
+{%- endcomment -%}
+{%- assign project = nil -%}
+{%- if page.collection == "projects" -%}
+  {%- assign project = page -%}
+{%- elsif page.under -%}
+  {%- assign purl = "/projects/" | append: page.under | append: "/" -%}
+  {%- assign project = site.projects | where: "url", purl | first -%}
+{%- endif -%}
+{%- assign section = page.section -%}
+{%- if project or page.collection == "topics" -%}{%- assign section = "Projects" -%}{%- endif -%}
 <header class="site-header">
   <nav class="crumbs" aria-label="Breadcrumb">
     {%- comment -%}
@@ -9,23 +21,42 @@
     pointing right inside a section, where it doubles as the first separator.
     {%- endcomment -%}
     <a class="crumb-home{% if on_home %} open{% endif %}" href="{{ home | relative_url }}" aria-label="Home">{% include icon-home.html %}</a>
-    {%- if on_home == false and section %}
-    {%- if page.collection %}
-    <a href="{{ home | relative_url }}">{{ section }}</a>
-    {%- comment -%} A project shows its first topic as the crumb before its own name. {%- endcomment -%}
-    {%- if page.collection == "projects" and page.topics.size > 0 %}
-    {%- assign topic = site.topics | where: "slug", page.topics[0] | first %}
+    {%- unless on_home %}
+
+    {%- if project or page.collection == "topics" %}
+    <a href="{{ home | relative_url }}">Projects</a>
+    {%- endif %}
+
+    {%- comment -%} The topic: the page itself on a topic page, else the project's first. {%- endcomment -%}
+    {%- assign topic = nil %}
+    {%- if page.collection == "topics" %}{% assign topic = page %}
+    {%- elsif project and project.topics.size > 0 %}{% assign topic = site.topics | where: "slug", project.topics[0] | first %}
+    {%- endif %}
     {%- if topic %}
     <span class="sep" aria-hidden="true">{% include icon-chevron.html %}</span>
+    {%- if page.collection == "topics" %}
+    <span class="current" aria-current="page">{{ topic.title }}</span>
+    {%- else %}
     <a href="{{ topic.url | relative_url }}">{{ topic.title }}</a>
     {%- endif %}
     {%- endif %}
+
+    {%- if project %}
     <span class="sep" aria-hidden="true">{% include icon-chevron.html %}</span>
-    <span class="current" aria-current="page">{{ page.title }}</span>
+    {%- if page.under %}
+    <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+    <span class="sep" aria-hidden="true">{% include icon-chevron.html %}</span>
+    <span class="current" aria-current="page">{{ page.crumb | default: page.title }}</span>
     {%- else %}
+    <span class="current" aria-current="page">{{ project.title }}</span>
+    {%- endif %}
+    {%- endif %}
+
+    {%- comment -%} Standalone pages such as Me or the styleguide. {%- endcomment -%}
+    {%- if project == nil and page.collection != "topics" and section %}
     <span class="current" aria-current="page">{{ section }}</span>
     {%- endif %}
-    {%- endif %}
+    {%- endunless %}
   </nav>
   <nav class="sections" aria-label="Sections">
     <a href="{{ home | relative_url }}"{% if on_home or section == "Projects" %} class="active"{% endif %}>Projects</a>

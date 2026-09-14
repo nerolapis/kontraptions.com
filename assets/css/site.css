@@ -720,6 +720,42 @@ footer {
   .project-info { min-height: 0; }
 }
 
+/* Colon update check at /projects/colon/update/ */
+.update {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.update-verdict {
+  margin: 0;
+  font-size: 5.5rem;
+  line-height: calc(var(--unit) * 4);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.update-detail { margin: var(--half) 0 0; color: var(--muted); }
+.update-action { margin: var(--unit) 0 0; }
+
+.update-action a {
+  display: inline-block;
+  padding: 0.375rem 1.1rem;
+  line-height: var(--unit);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: filter 0.15s, transform 0.15s;
+}
+
+.update-action a:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
 /* Coming-soon page */
 .coming-soon {
   min-height: 80vh;
