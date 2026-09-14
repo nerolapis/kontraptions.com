@@ -7,6 +7,7 @@ cover_style: photo
 # Pragma Conference 2025, second day.
 date: 2025-10-31
 topics: [talks]
+still: /assets/img/talks/sacred-secret-still.jpg
 video: YOM1IrFmavc
 duration: 35 min
 links:

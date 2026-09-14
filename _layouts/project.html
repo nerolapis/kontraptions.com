@@ -64,7 +64,7 @@ layout: default
   </header>
 
   {%- if page.video %}
-  {% include video.html id=page.video title=page.title %}
+  {% include video.html id=page.video still=page.still title=page.title %}
   {%- endif %}
 
   {{ content }}

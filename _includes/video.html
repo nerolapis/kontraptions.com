@@ -1,8 +1,13 @@
 {%- comment -%}
-Embedded YouTube player, from the no-cookie domain so it sets no tracking
-cookies until the visitor interacts with it.
-Usage: {% include video.html id=page.video title=page.title %}
+A link to the talk on YouTube, shown as the talk's own cover with a play button
+over it. Nothing is loaded from YouTube, so opening the page contacts Google
+not at all; the visitor reaches youtube.com only by choosing to, and the view
+counts there as normal.
+Usage: {% include video.html id=page.video still=page.still title=page.title %}
 {%- endcomment -%}
-<div class="video">
-  <iframe src="https://www.youtube-nocookie.com/embed/{{ include.id }}?rel=0" title="{{ include.title }}" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-</div>
+<a class="video" href="https://www.youtube.com/watch?v={{ include.id }}" target="_blank" rel="noopener" aria-label="Watch {{ include.title }} on YouTube">
+  <img src="{{ include.still | relative_url }}" alt="">
+  <span class="play">
+    <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+  </span>
+</a>
