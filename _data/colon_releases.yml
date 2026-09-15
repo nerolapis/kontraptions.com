@@ -5,18 +5,20 @@
 #   - the "what you missed" list on the update page
 # The download itself comes from downloads/Colon-latest.json, which your build
 # script writes, so version numbers here should match what it publishes.
-#
-# TODO: the notes for 1.0.1 and 1.0.2 are placeholders. Replace them.
 
 - version: "1.0.2"
   date: "2026-09-15"
   changes:
-    - Placeholder. What changed in 1.0.2?
+    - Inserting an emoji next to another one no longer replaces it.
+    - Preferences redesigned in the System Settings style.
+    - Library columns gained inline filters and arrow-key navigation.
+    - Added Check for Updates, in the menu bar and in Preferences.
 
 - version: "1.0.1"
   date: "2026-09-13"
   changes:
-    - Placeholder. What changed in 1.0.1?
+    - Preferences no longer opens behind the app you were using.
+    - Diagnostic logs now go to Console, with anything you type redacted.
 
 - version: "1.0"
   date: "2026-09-12"
