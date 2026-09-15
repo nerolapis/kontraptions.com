@@ -42,12 +42,12 @@ Colon lives in the menu bar and starts with your Mac if you like. It never steal
 ## Screenshots
 
 <figure class="shot">
-  <img src="{{ '/assets/img/colon/mail-wave@2x.png' | relative_url }}" alt="A Mail compose window. The subject reads Hello there :wave and Colon's panel lists waving hand, water wave, and other matches" width="728" height="487" loading="lazy">
+  <img src="{{ '/assets/img/colon/mail-wave@2x.png' | relative_url }}" alt="A Mail compose window. The subject reads Hello there :wave and Colon's panel lists waving hand, water wave, and other matches" width="728" height="343" loading="lazy">
   <figcaption>Type <code>:wave</code> in the subject line of a mail, pick, done.</figcaption>
 </figure>
 
 <figure class="shot">
-  <img src="{{ '/assets/img/colon/duckduckgo-hieroglyph@2x.png' | relative_url }}" alt="The DuckDuckGo search box with :penis typed in it, and Colon's panel listing three matching Egyptian hieroglyphs" width="756" height="378" loading="lazy">
+  <img src="{{ '/assets/img/colon/duckduckgo-hieroglyph@2x.png' | relative_url }}" alt="The DuckDuckGo search box with :penis typed in it, and Colon's panel listing three matching Egyptian hieroglyphs" width="728" height="343" loading="lazy">
   <figcaption>The whole Unicode library is in there. Yes, the hieroglyphs have proper names.</figcaption>
 </figure>
 
