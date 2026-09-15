@@ -756,6 +756,30 @@ footer {
 
 .update-action a:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
+/* Release notes, on the project page and the update check */
+.release-list { list-style: none; padding: 0; margin: 0; }
+.release-list > li { margin-bottom: var(--unit); }
+
+.release-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.release-head time { color: var(--muted); font-size: 0.9rem; }
+.release-list ul { margin: 0; padding-left: 1.25rem; }
+
+.update-missed {
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+  padding-bottom: var(--unit);
+  text-align: left;
+}
+
+.update-missed h2 { margin-top: 0; }
+
 /* Coming-soon page */
 .coming-soon {
   min-height: 80vh;

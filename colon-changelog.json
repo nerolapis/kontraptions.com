@@ -1,0 +1,6 @@
+---
+permalink: /downloads/colon-changelog.json
+layout: null
+sitemap: false
+---
+{{ site.data.colon_releases | jsonify }}

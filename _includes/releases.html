@@ -1,0 +1,18 @@
+{%- comment -%}
+Release notes from a data file of releases, newest first.
+Usage: {% include releases.html data="colon_releases" limit=5 %}
+{%- endcomment -%}
+{%- assign releases = site.data[include.data] -%}
+{%- if include.limit -%}{%- assign releases = releases | slice: 0, include.limit -%}{%- endif -%}
+<ul class="release-list">
+  {%- for r in releases %}
+  <li>
+    <p class="release-head"><strong>{{ r.version }}</strong><time datetime="{{ r.date }}">{{ r.date | date: "%-d %B %Y" }}</time></p>
+    <ul>
+      {%- for c in r.changes %}
+      <li>{{ c }}</li>
+      {%- endfor %}
+    </ul>
+  </li>
+  {%- endfor %}
+</ul>

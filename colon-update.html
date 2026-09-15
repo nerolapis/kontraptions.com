@@ -19,6 +19,7 @@ with every release, so nothing here has to be updated when you ship.
   <p class="update-detail">Checking for a newer version.</p>
   <p class="update-action"></p>
 </section>
+<section class="update-missed" hidden></section>
 
 <script>
   (function () {
@@ -49,9 +50,41 @@ with every release, so nothing here has to be updated when you ship.
     }
 
     // Skip any cached copy: a check moments after a release must not lie.
-    fetch('{{ "/downloads/Colon-latest.json" | relative_url }}?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
-      .then(function (d) {
+    function grab(path) {
+      return fetch(path + '?t=' + Date.now(), { cache: 'no-store' })
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); });
+    }
+
+    function esc(t) {
+      return String(t).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+
+    // Everything released after the version being run, newest first.
+    function missed(log, from) {
+      var box = document.querySelector('.update-missed');
+      var newer = (log || []).filter(function (r) { return cmp(r.version, from) > 0; });
+      if (!newer.length) return;
+      box.innerHTML = '<h2>What you missed</h2><ul class="release-list">' + newer.map(function (r) {
+        var when = r.date ? new Date(r.date + 'T00:00:00').toLocaleDateString(undefined,
+          { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+        return '<li><p class="release-head"><strong>' + esc(r.version) + '</strong><time>' + esc(when)
+          + '</time></p><ul>' + (r.changes || []).map(function (c) {
+            return '<li>' + esc(c) + '</li>';
+          }).join('') + '</ul></li>';
+      }).join('') + '</ul>';
+      box.hidden = false;
+    }
+
+    // The manifest decides the verdict; the changelog only adds detail, so a
+    // missing or broken changelog must not break the check.
+    Promise.all([
+      grab('{{ "/downloads/Colon-latest.json" | relative_url }}'),
+      grab('{{ "/downloads/colon-changelog.json" | relative_url }}').catch(function () { return null; })
+    ])
+      .then(function (both) {
+        var d = both[0], log = both[1];
         var download = '<a href="{{ "/downloads/" | relative_url }}' + d.file + '">Download ' + d.version + '</a>';
         var order = mine ? cmp(mine, d.version) : null;
 
@@ -61,6 +94,7 @@ with every release, so nothing here has to be updated when you ship.
           show('good', '\uD83C\uDF89', 'You are running ' + mine + ', the latest version.', '', 'Up to date');
         } else if (order < 0) {
           show('stale', '\uD83D\uDD04', 'You are running ' + mine + '. Version ' + d.version + ' is out.', download, 'Update available');
+          missed(log, mine);
         } else {
           show('neutral', '\uD83D\uDD2E', 'You are running ' + mine + ', newer than the public ' + d.version + '.', '', 'Ahead of the public release');
         }

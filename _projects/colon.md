@@ -6,11 +6,11 @@ cover: /assets/img/colon-cover.png
 cover_style: photo
 image: /assets/img/colon-icon.png
 image_style: icon
-# Colon is ordered by its latest release; keep this equal to `released`.
-date: 2026-09-13
+# Sorting date for the project grid; bump it when a release is worth resurfacing.
+date: 2026-09-15
 topics: [never-phones-home]
-version: "1.0.1"
-released: 2026-09-13
+# Version and release notes come from _data/colon_releases.yml, newest entry first.
+releases: colon_releases
 links:
   - label: Download for macOS
     url: /downloads/Colon.dmg
@@ -64,3 +64,7 @@ The flip side of never going online is that Colon <mark class="orange">will not 
 ## Requirements
 
 macOS 15 Sequoia or later
+
+## What's new
+
+{% include releases.html data="colon_releases" limit=5 %}

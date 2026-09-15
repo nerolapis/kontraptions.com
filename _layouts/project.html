@@ -49,8 +49,17 @@ layout: default
         <h1>{{ page.title }}</h1>
         {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
       </div>
-      {% if page.version %}
-      <p class="version">Version {{ page.version }}{% if page.released %}, released {{ page.released | date: "%-d %B %Y" }}{% endif %}</p>
+      {%- comment -%}
+      `releases` names a data file of releases, newest first, and the newest one
+      supplies the version. A project without one can still state `version` and
+      `released` directly in its front matter.
+      {%- endcomment -%}
+      {%- assign latest = nil %}
+      {%- if page.releases %}{% assign latest = site.data[page.releases] | first %}{% endif %}
+      {%- assign shown_version = page.version | default: latest.version %}
+      {%- assign shown_date = page.released | default: latest.date %}
+      {% if shown_version %}
+      <p class="version">Version {{ shown_version }}{% if shown_date %}, released {{ shown_date | date: "%-d %B %Y" }}{% endif %}</p>
       {% elsif page.duration %}
       <p class="version">{{ page.duration }}{% if page.date %}, {{ page.date | date: "%B %Y" }}{% endif %}</p>
       {% endif %}

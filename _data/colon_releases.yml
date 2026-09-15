@@ -1,0 +1,24 @@
+# Colon's release history, newest first. This is the one place you write
+# release notes; it drives three things:
+#   - the version line on the Colon page
+#   - the "What's new" list on the Colon page
+#   - the "what you missed" list on the update page
+# The download itself comes from downloads/Colon-latest.json, which your build
+# script writes, so version numbers here should match what it publishes.
+#
+# TODO: the notes for 1.0.1 and 1.0.2 are placeholders. Replace them.
+
+- version: "1.0.2"
+  date: "2026-09-15"
+  changes:
+    - Placeholder. What changed in 1.0.2?
+
+- version: "1.0.1"
+  date: "2026-09-13"
+  changes:
+    - Placeholder. What changed in 1.0.1?
+
+- version: "1.0"
+  date: "2026-09-12"
+  changes:
+    - First public release.
