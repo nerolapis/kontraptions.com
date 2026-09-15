@@ -42,7 +42,7 @@ Colon lives in the menu bar and starts with your Mac if you like. It never steal
 ## Screenshots
 
 <figure class="shot">
-  <img src="{{ '/assets/img/colon/mail-wave@2x.png' | relative_url }}" alt="A Mail compose window. The subject reads Hello there :wave and Colon's panel lists waving hand, water wave, and other matches" width="596" height="738" loading="lazy">
+  <img src="{{ '/assets/img/colon/mail-wave@2x.png' | relative_url }}" alt="A Mail compose window. The subject reads Hello there :wave and Colon's panel lists waving hand, water wave, and other matches" width="728" height="487" loading="lazy">
   <figcaption>Type <code>:wave</code> in the subject line of a mail, pick, done.</figcaption>
 </figure>
 
